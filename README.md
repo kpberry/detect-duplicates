@@ -54,4 +54,4 @@ Comparing large files is expensive, so we want to minimize the amount of compari
 
 Because we use high quality 64 bit hashes, the probability of more than one file having the same content hash but different contents is roughly[^1] #files with same content hash/2^64, which should be extremely small. Thus, we expect there to only be one key in the second map at a time and one file loaded, which we need to compare to the value in the map, meaning that, at most, we expect to have two files loaded simultaneously into RAM. Each file is loaded at most twice in total; once to compute the key for the first map, and once to compute the key in the second map, if applicable. 
 
-[^1]: The exact value is 1 - ((F - 1) / F) ** k, where F is the number of files with the same content hash and k is 2^64, which is about the same as F/k for practical values (k < 1,000,000,000).
+[^1]: The exact value is 1 - ((k - 1) / k) ** F, where F is the number of files with the same content hash and k is 2^64, which is about the same as F/k for practical values (F < 1,000,000,000).
