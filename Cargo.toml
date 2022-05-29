@@ -1,11 +1,15 @@
 [package]
 name = "detect-duplicates"
-version = "0.1.4"
+version = "0.2.0"
 edition = "2021"
 description = "Detects and reports duplicate files in a file system"
 license = "MIT"
 homepage = "https://github.com/kpberry/detect-duplicates"
 documentation = "https://docs.rs/detect-duplicates"
+
+[lib]
+path = "src/lib.rs"
+name = "duplicates"
 
 [[bin]]
 path = "src/main.rs"

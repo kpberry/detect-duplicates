@@ -1,7 +1,7 @@
 //! This crate can be used to detect and report duplicate files in a file 
 //! system.
 //! 
-//! The functions in [`duplicates`] can be used to get a list of lists of 
+//! The functions in [`duplicates::duplicates`] can be used to get a list of lists of 
 //! duplicate file paths. [`get_duplicates_hashed`] should generally be 
 //! preferred, since it uses memory proportional to the size of the largest 
 //! file, independent of how many files are being checked.
@@ -38,11 +38,7 @@
 use std::path::Path;
 
 use clap::Parser;
-use duplicates::get_duplicates_hashed;
-use paths::get_descendants;
-
-pub mod duplicates;
-pub mod paths;
+use duplicates::{paths::get_descendants, duplicates::get_duplicates_hashed};
 
 /// Command line arguments used when running this crate as a script.
 #[derive(Parser)]
