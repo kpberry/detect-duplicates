@@ -9,7 +9,7 @@ As a benchmark, it can check the entire linux kernel repository (roughly 5GB, ov
 You will need to install [Rust](https://www.rust-lang.org/learn/get-started) in order to install this program. 
 After installing Rust, installation is simply:
 ```
-cargo install duplicate-detector
+cargo install detect-duplicates
 ```
 
 ## Usage:
