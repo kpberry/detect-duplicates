@@ -65,7 +65,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "duplicate-detector"
+name = "detect-duplicates"
 version = "0.1.0"
 dependencies = [
  "clap",

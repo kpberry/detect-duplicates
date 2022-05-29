@@ -4,12 +4,10 @@ Detects and reports duplicate files in a file system.
 This program runs in linear time with respect to the number of files being checked and loads (in expectation) only two files into memory at a time, and can thus be used to efficiently check huge amounts of very large files for duplicates.
 
 ## Installation:
-You will need to install [Rust](https://www.rust-lang.org/learn/get-started) in order to build this program from source. 
+You will need to install [Rust](https://www.rust-lang.org/learn/get-started) in order to install this program. 
 After installing Rust, installation is simply:
 ```
-git clone https://github.com/kpberry/duplicate-detector
-cd duplicate-detector
-cargo install --path .
+cargo install duplicate-detector
 ```
 
 ## Usage:
