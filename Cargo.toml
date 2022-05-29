@@ -1,6 +1,6 @@
 [package]
 name = "detect-duplicates"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 description = "Detects and reports duplicate files in a file system"
 license = "MIT"
