@@ -51,7 +51,7 @@ files/more_files/c.txt
 files/more_files/d.txt
 ```
 
-## Technical details
+## Technical details:
 Comparing large files is expensive, so we want to minimize the amount of comparisons done. Reading files is also expensive, but not as expensive as buying more RAM. We can achieve a linear number of comparisons while reading each file at most twice by doing the following:
 1. We compute a hash of the contents of each file, and store a mapping from the **hashes** to lists of files with that same hash.
 2. For each list of files with at least two elements with the same hash, we store a mapping from the **contents** to the lists of files with the same contents.

@@ -1,3 +1,5 @@
+//! Functions for detecting duplicates in a set of paths.
+
 use std::{
     collections::{hash_map::DefaultHasher, HashMap},
     fs,
@@ -20,7 +22,7 @@ use std::{
 /// intented to be used as a subroutine when the expected number of unique 
 /// files is small.
 /// 
-/// Example
+/// ## Example
 /// ```no_run
 /// // assume that a.txt and e.txt have the same contents, and b.txt, c.txt and d.txt have the same contents 
 /// let paths = vec![
@@ -65,7 +67,7 @@ pub fn get_duplicates(paths: &[PathBuf]) -> Vec<Vec<PathBuf>> {
 /// number of files, n is the number of unique files, and F is the average 
 /// file size.
 /// 
-/// Example
+/// ## Example
 /// ```no_run
 /// // assume that a.txt and e.txt have the same contents, and b.txt, c.txt and d.txt have the same contents 
 /// let paths = vec![
@@ -83,9 +85,6 @@ pub fn get_duplicates(paths: &[PathBuf]) -> Vec<Vec<PathBuf>> {
 /// ];
 /// assert!(duplicates == expected);
 /// ```
-/// 
-/// Runs in O(NF) time and O(nF) memory, where N is the total number of files, 
-/// n is the number of unique files, and F is the average file size.
 pub fn get_duplicates_hashed(paths: &[PathBuf]) -> Vec<Vec<PathBuf>> {
     let mut candidate_duplicates: HashMap<(u64, usize), Vec<PathBuf>> = HashMap::new();
     for path in paths.iter().cloned() {
