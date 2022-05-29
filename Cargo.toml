@@ -5,6 +5,7 @@ edition = "2021"
 description = "Detects and reports duplicate files in a file system"
 license = "MIT"
 homepage = "https://github.com/kpberry/detect-duplicates"
+documentation = "https://docrs.rs/detect-duplicates"
 
 [[bin]]
 path = "src/main.rs"
