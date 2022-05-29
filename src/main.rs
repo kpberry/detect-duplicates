@@ -38,7 +38,7 @@
 use std::path::Path;
 
 use clap::Parser;
-use duplicates::{get_duplicates, get_duplicates_hashed};
+use duplicates::get_duplicates_hashed;
 use paths::get_descendants;
 
 pub mod duplicates;
