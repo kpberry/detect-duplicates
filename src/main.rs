@@ -39,12 +39,12 @@ fn main() {
     let descendants = get_descendants(base_path);
     for paths in get_duplicates_hashed(&descendants) {
         println!(
-            "{}",
+            "{}\n",
             paths
                 .iter()
                 .map(|path| path.display().to_string())
                 .collect::<Vec<String>>()
-                .join(", ")
+                .join("\n")
         );
     }
 }

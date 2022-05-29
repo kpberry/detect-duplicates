@@ -11,7 +11,7 @@ cargo install duplicate-detector
 ```
 
 ## Usage:
-This program takes a path to a directory and outputs any files which are copies of another file within that directory or any of its children. Each group of equal files will be output as a comma separated list.
+This program takes a path to a directory and outputs any files which are copies of another file within that directory or any of its children. Each group of equal files will be output as a newline separated list. Groups of files are separated by two newlines.
 
 For example, given the following directory structure:
 ```
@@ -31,17 +31,22 @@ detect-duplicates files
 ```
 will produce the following output:
 ```
-files/a.txt, files/more_files/even_more_files/e.txt
-files/b.txt, files/more_files/c.txt, files/more_files/d.txt
+files/a.txt
+files/more_files/even_more_files/e.txt
+
+files/b.txt
+files/more_files/c.txt
+files/more_files/d.txt
 ```
 
 And this command:
 ```
 detect-duplicates files/more_files
 ```
-would output
+would output:
 ```
-files/more_files/c.txt, files/more_files/d.txt
+files/more_files/c.txt
+files/more_files/d.txt
 ```
 
 ## Technical details
