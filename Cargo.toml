@@ -1,7 +1,9 @@
 [package]
-name = "duplicate-detector"
+name = "detect-duplicates"
 version = "0.1.0"
 edition = "2021"
+description = "Detects and reports duplicate files in a file system"
+license = "MIT"
 
 [[bin]]
 path = "src/main.rs"
