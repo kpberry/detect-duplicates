@@ -3,7 +3,7 @@ Detects and reports duplicate files in a file system.
 
 This program runs in linear time with respect to the number of files being checked and loads (in expectation) only two files into memory at a time, and can thus be used to efficiently check huge amounts of very large files for duplicates.
 
-As a benchmark, it can check the entire linux kernel repository (roughly 5GB, over 70,00 files) in about 5 seconds.
+As a benchmark, it can check the entire linux kernel repository (roughly 5GB, over 70,000 files) in about 5 seconds.
 
 ## Installation:
 You will need to install [Rust](https://www.rust-lang.org/learn/get-started) in order to install this program. 
