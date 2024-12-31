@@ -36,4 +36,5 @@
 //! ```
 
 pub mod duplicates;
+pub mod copies;
 pub mod paths;
