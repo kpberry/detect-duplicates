@@ -1,10 +1,7 @@
 //! Functions for counting copies in a set of paths.
 
 use std::{
-    collections::{hash_map::DefaultHasher, HashMap},
-    fs,
-    hash::{Hash, Hasher},
-    path::PathBuf,
+    collections::HashMap, fs::{self, File}, io::{Read, Seek}, path::PathBuf
 };
 
 /// Returns a list of all sets of copies of files in a set of paths.
@@ -78,15 +75,32 @@ pub fn get_copies(paths: &[PathBuf]) -> Vec<Vec<PathBuf>> {
 /// assert!(copies == expected);
 /// ```
 pub fn get_copies_hashed(paths: &[PathBuf]) -> Vec<Vec<PathBuf>> {
-    let mut candidate_copies: HashMap<(u64, usize), Vec<PathBuf>> = HashMap::new();
+    let mut candidate_copies: HashMap<(Vec<u8>, usize), Vec<PathBuf>> = HashMap::new();
     for path in paths.iter().cloned() {
-        let contents = fs::read(&path);
-        if let Ok(contents) = contents {
-            let mut hasher = DefaultHasher::new();
-            contents.hash(&mut hasher);
-            let contents_hash = hasher.finish();
-            let key = (contents_hash, contents.len());
-            candidate_copies.entry(key).or_insert(vec![]).push(path);
+        let file = File::open(&path);
+        match file {
+            Ok(mut file) => {
+                let len = file.metadata().map_or(0, |md| md.len()) as usize;
+                let contents = if len <= 4096 {
+                    fs::read(&path).unwrap()
+                } else {
+                    let steps = 4;
+                    let read_size = 64 / steps;
+                    let step = (len / steps) as i64;
+                    let mut buf: Vec<u8> = (0..read_size).map(|_| 0).collect();
+                    let mut contents_buf = Vec::with_capacity(64);
+                    for _ in 0..steps {
+                        file.read_exact(&mut buf).unwrap();
+                        contents_buf.push(buf[0]);
+                        file.seek(std::io::SeekFrom::Current(step)).unwrap();
+                    }
+                    buf
+                };
+
+                let key = (contents, len);
+                candidate_copies.entry(key).or_insert(vec![]).push(path);
+            },
+            Err(err) => eprintln!("error opening file {}: {}", path.display().to_string(), err),
         }
     }
 
