@@ -17,3 +17,4 @@ name = "detect-duplicates"
 
 [dependencies]
 clap = { version = "3.1.18", features = ["derive"] }
+colored = { version = "2.2.0" }
