@@ -35,7 +35,8 @@ fn main() {
         .map(|path| get_descendants(path, args.max_depth))
         .flatten()
         .collect();
-    for paths in get_copies_hashed(&descendants) {
+    let (copies, errors) = get_copies_hashed(&descendants);
+    for paths in copies {
         let count = paths.len();
         if count < args.min_count || args.max_count.is_some_and(|max_count| count > max_count) {
             continue;
@@ -45,7 +46,7 @@ fn main() {
             paths.iter().map(|path| path.display().to_string()).collect()
         } else {
             let common_prefix = get_common_prefix(&paths);
-            let common_prefix_string = common_prefix.display().to_string().color(Color::Red);
+            let common_prefix_string = common_prefix.display().to_string().color(Color::Cyan);
             paths.iter().map(|path| {
                 let stripped = path.strip_prefix(&common_prefix);
                 if let Ok(stripped) = stripped {
@@ -66,5 +67,13 @@ fn main() {
             path_strings.join(&args.separator),
             &args.group_separator,
         );
+    }
+
+    if errors.len() > 0 {
+        eprintln!("{}", format!("{} ERRORS {}", "=".repeat(30), "=".repeat(30)).color(Color::BrightRed));
+        for error in errors {
+            eprintln!("{}", error);
+        }
+        eprintln!("{}", String::from("Results may be invalid due to the above errors.").color(Color::BrightRed))
     }
 }
